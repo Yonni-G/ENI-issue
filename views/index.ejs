@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ENI ISSUE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+
+    <div style="width: 60%; margin: auto">
+
+        <% if(issues && issues.length > 0) { %>
+            <h1 class="text-2xl font-bold text-center mb-4">Liste des issues</h1>
+        
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">Actions</th>
+                <th scope="col" class="px-6 py-3">Auteur</th>
+                <th scope="col" class="px-6 py-3">Date de création</th>
+                <th scope="col" class="px-6 py-3">Titre</th>
+                <th scope="col" class="px-6 py-3">Description</th>
+                <th scope="col" class="px-6 py-3">État</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% issues.forEach(issue => { %>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                <td class="px-6 py-4">
+                    <p><a href="/issue/<%= issues.indexOf(issue); %>">Voir</a></p>
+                    <p><a href="/issues/delete/<%= issues.indexOf(issue); %>">Supprimer</a></p>
+                    <p><a href="/issues/update/<%= issues.indexOf(issue); %>">Modifier</a></p>
+                </p></td>
+                <td class="px-6 py-4"><%= issue.auteur %></td>
+                <td class="px-6 py-4"><%= issue.date %></td>
+                <td class="px-6 py-4"><%= issue.titre %></td>
+                <td class="px-6 py-4"><%= issue.description %></td>
+                <td class="px-6 py-4"><%= issue.etat %></td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+<% } else { %>
+    <h1 class="text-2xl font-bold text-center mb-4">Aucune issue pour le moment</h1>
+<% } %>
+
+    <hr />
+    <h2 id="form_title" class="text-2xl font-bold text-center mb-4"><%= formTitle %></h2>
+    <form action="<%= formAction %>" method="POST">
+      
+        <!-- Text input -->
+        <div class="mb-4 w-full">
+          <label for="09eafa27-bce1-49f7-b4e4-c9d6049accf0"
+            >Nom de l'auteur :</label
+          >
+          <input
+          value="<%= issue.auteur %>"
+            name="auteur"
+            placeholder="Nom de l'auteur"
+            type="text"
+            id="09eafa27-bce1-49f7-b4e4-c9d6049accf0"
+            class="w-full block rounded-lg border dark:border-none dark:bg-neutral-600 py-[9px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+          />
+        </div>
+
+        <!-- Text input -->
+        <div class="mb-4 w-full">
+          <label for="58547c62-19e0-40e1-8588-34f9b4460fbb"
+            >Date de création :</label
+          >
+          <input
+          value="<%= issue.date %>"
+          name="date"  
+          placeholder="Date de création"
+            type="date"
+            id="58547c62-19e0-40e1-8588-34f9b4460fbb"
+            class="w-full block rounded-lg border dark:border-none dark:bg-neutral-600 py-[9px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+          />
+        </div>
+
+        <!-- Text input -->
+        <div class="mb-4 w-full">
+          <label for="31ab91a8-944c-4ad6-abe0-abdd61e5515d">Titre :</label>
+          <input
+          value="<%= issue.titre %>"
+            name="titre"
+            type="text"
+            id="31ab91a8-944c-4ad6-abe0-abdd61e5515d"
+            class="w-full block rounded-lg border dark:border-none dark:bg-neutral-600 py-[9px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+          />
+        </div>
+
+        <!-- Textarea -->
+        <div class="mb-4 w-full">
+          <label for="5f34b6cb-fa74-477d-80cc-10bc61aa11fb"
+            >Description :</label
+          >
+          <textarea
+            value="<%= issue.description %>"
+            name="description"
+            placeholder="Description"
+            rows="4"
+            class="w-full block rounded-lg border dark:border-none dark:bg-neutral-600 py-[9px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+          ></textarea>
+        </div>
+        <div class="mb-4 w-full">
+            <label for="etat">État :</label>
+          <select name="etat" id="etat">
+            <option value="En cours">En cours</option>
+            <option value="Terminé">Terminé</option>
+          </select>
+        </div>
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="block mb-4 w-full rounded-full bg-blue-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
+        >
+          <%= formButton %>
+        </button>
+      </div>
+    </form>
+  </body>
+</html>
